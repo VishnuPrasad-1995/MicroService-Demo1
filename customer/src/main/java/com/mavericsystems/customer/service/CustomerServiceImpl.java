@@ -101,13 +101,20 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public String deleteCustomer(Integer id) {
-        Customer customer = customerRepo.findByCustomerId(id);
+
         //when deleting the customer in customer application , account against the customer also gets deleted
         //feign call to account application
         //only soft deletion is used
-        customer.setIsActive(accountFeign.deleteCustomerAndAccount(id));
-        customerRepo.save(customer);
+        try {
+            Customer customer = customerRepo.findByCustomerId(id);
+            customer.setIsActive(accountFeign.deleteCustomerAndAccount(id));
+            customerRepo.save(customer);
+        }
+        catch(HystrixRuntimeException e) {
+            throw new CustomFeignException("account server down");
+        }
         return "Customer deleted for id : "+id;
+
     }
 
 

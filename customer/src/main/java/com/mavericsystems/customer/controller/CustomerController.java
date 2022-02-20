@@ -22,8 +22,8 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-    String custNotFound = "Customer Not Found with : " ;
-    String custAlreadyExist = "Customer Already exist : " ;
+    private final static String custNotFound = "Customer Not Found with : " ;
+    private final static String custAlreadyExist = "Customer Already exist : " ;
 
 
     @PostMapping("/addCustomer")
