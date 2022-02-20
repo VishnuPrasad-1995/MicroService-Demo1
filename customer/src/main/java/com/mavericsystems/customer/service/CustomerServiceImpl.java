@@ -2,9 +2,11 @@ package com.mavericsystems.customer.service;
 
 
 import com.mavericsystems.customer.dto.UpdateCustomerDTO;
+import com.mavericsystems.customer.exception.CustomFeignException;
 import com.mavericsystems.customer.feign.AccountFeign;
 import com.mavericsystems.customer.model.*;
 import com.mavericsystems.customer.repo.CustomerRepo;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -49,10 +51,17 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public CustomerAllData getAllDataByCustomerId(Integer customerId) {
         //this gets all data from account application for a customer
+
         Customer customerData = customerRepo.findByCustomerId(customerId);
         //get call to account app using feign client
-        List<Account> accounts = accountFeign.getAccountDetailsByCustomerId(customerId);
+       try{
+            List<Account> accounts = accountFeign.getAccountDetailsByCustomerId(customerId);
         return new CustomerAllData(accounts,customerData);
+        }
+        catch(HystrixRuntimeException e) {
+            throw new CustomFeignException("account server down");
+        }
+
     }
 
 
