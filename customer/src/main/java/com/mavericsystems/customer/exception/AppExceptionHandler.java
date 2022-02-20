@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CustomerNotFoundException.class)
-    ResponseEntity customerNotFoundHandler(Exception exception, ServletWebRequest request) {
+    ResponseEntity<Object> customerNotFoundHandler(Exception exception, ServletWebRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.NOT_FOUND);
         apiError.setErrors(Arrays.asList(exception.getMessage()));
@@ -30,7 +30,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(CustomerAlreadyExistException.class)
-    ResponseEntity customerAlreadyExistHandler(Exception exception, ServletWebRequest request) {
+    ResponseEntity<Object>  customerAlreadyExistHandler(Exception exception, ServletWebRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.CONFLICT);
         apiError.setErrors(Arrays.asList(exception.getMessage()));
@@ -39,7 +39,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }
     @ExceptionHandler(CustomFeignException.class)
-    ResponseEntity hystrixFallBackHandler(Exception exception, ServletWebRequest request) {
+    ResponseEntity<Object>  hystrixFallBackHandler(Exception exception, ServletWebRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.SERVICE_UNAVAILABLE);
         apiError.setErrors(Arrays.asList(exception.getMessage()));
