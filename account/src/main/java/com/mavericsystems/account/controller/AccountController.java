@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/AccountCreation")
+@RequestMapping("/accounts")
 public class AccountController {
     @Autowired
     AccountService accountService;
@@ -27,13 +27,13 @@ public class AccountController {
     String accNotFound = "Account Not found for : ";
     String noExistingAccountFound = "No Existing Account found for this customer";
     String accTypeAlreadyExist = "Account Type Already Exist";
-    @PostMapping("/addNewAccount") //this method is only called from customer application
+    @PostMapping("/account") //this method is only called from customer application
     public Account addAccount(@Valid @RequestBody AccountDetailsDTO account){
         Account account1 = new Account(account.getCustomerId(),account.getAccountCreationDate(),account.getAccountType(),account.getAccountBalance(),account.getIsActive(), LocalDateTime.now());
         return accountService.createAccount(account1);
     }
 
-    @PostMapping("/openDifferentTypeOfAccountForExistingCustomer")// this method is called from account application as it works only for existing customer
+    @PostMapping("/account/new")// this method is called from account application as it works only for existing customer
     public ResponseEntity<Account> addNewTypeOfAcctForExistingCustomer(@Valid @RequestBody AddNewTypeOfAccountForExistingCustomerDTO account){
        //checks whether customer present with this customer id
         if(Boolean.FALSE.equals(accountService.isActive(account.getCustomerId())))
@@ -45,7 +45,7 @@ public class AccountController {
         return new ResponseEntity<>(accountService.createAccount(account1), HttpStatus.CREATED);
     }
 
-    @GetMapping("/accountdetailsbycustomerid/{id}")//this method is accessed only from customer application
+    @GetMapping("/account/{id}")//this method is accessed only from customer application
     public List<Account> getAccountDetailsByCustomerId(@PathVariable("id") Integer id){
         //this method checks whether the any account is active for this customer as well as entered customer id is valid
         if(Boolean.FALSE.equals(accountService.isActive(id)))
@@ -53,7 +53,7 @@ public class AccountController {
         return accountService.getAccountDetailsByCustomerId(id);
     }
 
-        @GetMapping("/accountdetailsbyaccountid/{id}")//this method is accessed from account application
+        @GetMapping("/accountdetails/{id}")//this method is accessed from account application
     public ResponseEntity<Account> getAccountDetailsByAccountId(@PathVariable("id") Integer id){
         // checks only account is active or not and entered accountId is valid
         if(Boolean.FALSE.equals(accountService.isActiveAccount(id)))
@@ -69,19 +69,19 @@ public class AccountController {
         return new ResponseEntity<>(accountService.updateBalance(id,updateBalance),HttpStatus.OK);
     }
 
-    @GetMapping("/getAllAccounts")
+    @GetMapping("/allaccounts")
     public List<Account> getAllAccount(){
         return accountService.getAllAccount();
     }
 
-    @DeleteMapping("/deleteCustomerAndAccount/{id}")// this method is called from customer application
+    @DeleteMapping("/customer/account/{id}")// this method is called from customer application
     public Boolean deleteCustomerAndAccount(@PathVariable("id") Integer id){
         if(Boolean.FALSE.equals(accountService.isActive(id)))
             throw new AccountNotFoundException(accNotFound + id);
         return accountService.deleteCustomerAndAccount(id);
     }
 
-    @DeleteMapping("/deleteAccount/{id}")//this is called from account application and only works for valid customers with more than one account
+    @DeleteMapping("/account/{id}")//this is called from account application and only works for valid customers with more than one account
     public ResponseEntity<String> deleteAccount(@PathVariable("id") Integer id){
         if(Boolean.FALSE.equals(accountService.isActiveAccount(id)))
             throw new AccountNotFoundException(accNotFound + id);

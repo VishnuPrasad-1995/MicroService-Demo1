@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService{
         header.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Account> httpEntity = new HttpEntity<>(customer.getAccount(),header);
         //call to account application for creating account for this customer happens here using restTemplate
-        customer.setAccount(restTemplate.postForObject("http://account/AccountCreation/addNewAccount", httpEntity,Account.class));
+        customer.setAccount(restTemplate.postForObject("http://account/accounts/account", httpEntity,Account.class));
         customer.setCustomer(customerRepo.save(new Customer(LocalDate.now(),customer.getCustomer().getCustomerFirstName(),customer.getCustomer().getCustomerLastName(),customer.getCustomer().getCustomerId(),customer.getCustomer().getPhoneNumber(),customer.getAccount().getIsActive(),customer.getCustomer().getAddress(),customer.getCustomer().getCustomerType(), LocalDateTime.now())));
         return customer;
     }
@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService{
         }
         catch(HystrixRuntimeException e) {
             throw new CustomFeignException("account server down");
-        }
+       }
 
     }
 
@@ -105,15 +105,16 @@ public class CustomerServiceImpl implements CustomerService{
         //when deleting the customer in customer application , account against the customer also gets deleted
         //feign call to account application
         //only soft deletion is used
-        try {
+     try {
             Customer customer = customerRepo.findByCustomerId(id);
             customer.setIsActive(accountFeign.deleteCustomerAndAccount(id));
             customerRepo.save(customer);
-        }
+            return "Customer deleted for id : "+id;
+      }
         catch(HystrixRuntimeException e) {
-            throw new CustomFeignException("account server down");
-        }
-        return "Customer deleted for id : "+id;
+          throw new CustomFeignException("account server down");
+      }
+
 
     }
 

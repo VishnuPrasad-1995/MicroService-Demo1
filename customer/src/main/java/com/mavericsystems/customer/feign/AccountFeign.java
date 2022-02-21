@@ -10,8 +10,8 @@ import java.util.List;
 
 @FeignClient(name = "account", fallbackFactory = HystrixFallBackFactory.class)
 public interface AccountFeign {
-    @GetMapping(value = "/AccountCreation/accountdetailsbycustomerid/{id}")
+    @GetMapping(value = "/accounts/account/{id}")
     List<Account> getAccountDetailsByCustomerId(@PathVariable("id") Integer id);
-    @DeleteMapping(value = "/AccountCreation/deleteCustomerAndAccount/{id}")
+    @DeleteMapping(value = "/accounts/customer/account/{id}")
     Boolean deleteCustomerAndAccount(@PathVariable("id") Integer id);
 }

@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/CustomerCreation")
+@RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -26,7 +26,7 @@ public class CustomerController {
     private final static String custAlreadyExist = "Customer Already exist : " ;
 
 
-    @PostMapping("/addCustomer")
+    @PostMapping("/customer")
     public ResponseEntity<RequiredResponse> addCustomer(@Validated @RequestBody RequiredResponse customer){
             Integer customerId = customer.getCustomer().getCustomerId();
             if(customerService.customerPresent(customerId)!=null){
@@ -38,7 +38,7 @@ public class CustomerController {
 
 
 
-   @GetMapping("/customerdetails/{id}")
+   @GetMapping("/customer/{id}")
     public ResponseEntity<CustomerAllData> getAllDataByCustomerId(@PathVariable("id") Integer id){
           if(Boolean.FALSE.equals(customerService.customerIsActive(id)))
           {
@@ -52,12 +52,12 @@ public class CustomerController {
    }
 
 
-    @GetMapping("/getAllCustomer")
+    @GetMapping("/customer/allCustomer")
     public ResponseEntity<List<Customer>> getAllCustomer(){
         return new ResponseEntity<>(customerService.getAllCustomer(),HttpStatus.OK);
     }
 
-    @PutMapping("/updateDetails/{id}")
+    @PutMapping("/customer/customerId/{id}")
     public ResponseEntity<Customer> updateCustomerDetails(@PathVariable("id") Integer id,@Valid @RequestBody UpdateCustomerDTO customer){//only specific objects in the DTO object can be updated for a customer
         if(Boolean.FALSE.equals(customerService.customerIsActive(id)))
         {
@@ -66,7 +66,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.updateCustomer(id,customer), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteCustomer/{id}")
+    @DeleteMapping("/customer/{id}")
     public ResponseEntity<String> deleteCustomerDetails(@PathVariable("id") Integer id){
         if(Boolean.FALSE.equals(customerService.customerIsActive(id)))
         {
