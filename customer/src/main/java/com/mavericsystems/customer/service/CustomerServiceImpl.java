@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.mavericsystems.customer.constants.Constant.serverDown;
+
 @Service
 public class CustomerServiceImpl implements CustomerService{
     @Autowired
@@ -28,8 +30,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public RequiredResponse addCustomer(RequiredResponse customer) {
-        // this method creates customer and an account. Initial account creation of a customer happens through customer application.
-        HttpHeaders header = new HttpHeaders();
+
+       try{
         Account account = new Account();
         account.setCustomerId(customer.getCustomer().getCustomerId());
         account.setAccountCreationDate(LocalDate.now());
@@ -37,12 +39,14 @@ public class CustomerServiceImpl implements CustomerService{
         account.setAccountBalance(customer.getAccount().getAccountBalance());
         account.setIsActive(true);
         customer.setAccount(account);
-        header.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Account> httpEntity = new HttpEntity<>(customer.getAccount(),header);
         //call to account application for creating account for this customer happens here using restTemplate
-        customer.setAccount(restTemplate.postForObject("http://account/accounts/account", httpEntity,Account.class));
+        customer.setAccount(accountFeign.addAccount(customer.getAccount()));
         customer.setCustomer(customerRepo.save(new Customer(LocalDate.now(),customer.getCustomer().getCustomerFirstName(),customer.getCustomer().getCustomerLastName(),customer.getCustomer().getCustomerId(),customer.getCustomer().getPhoneNumber(),customer.getAccount().getIsActive(),customer.getCustomer().getAddress(),customer.getCustomer().getCustomerType(), LocalDateTime.now())));
         return customer;
+    }
+         catch(HystrixRuntimeException e) {
+            throw new CustomFeignException(serverDown);
+        }
     }
 
 
@@ -59,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService{
         return new CustomerAllData(accounts,customerData);
         }
         catch(HystrixRuntimeException e) {
-            throw new CustomFeignException("account server down");
+            throw new CustomFeignException(serverDown);
        }
 
     }
@@ -112,7 +116,7 @@ public class CustomerServiceImpl implements CustomerService{
             return "Customer deleted for id : "+id;
       }
         catch(HystrixRuntimeException e) {
-          throw new CustomFeignException("account server down");
+          throw new CustomFeignException(serverDown);
       }
 
 

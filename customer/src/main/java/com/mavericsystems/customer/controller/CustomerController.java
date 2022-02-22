@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.mavericsystems.customer.constants.Constant.custAlreadyExist;
+import static com.mavericsystems.customer.constants.Constant.custNotFound;
+
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-    private final static String custNotFound = "Customer Not Found with : " ;
-    private final static String custAlreadyExist = "Customer Already exist : " ;
+
 
 
     @PostMapping("/customer")

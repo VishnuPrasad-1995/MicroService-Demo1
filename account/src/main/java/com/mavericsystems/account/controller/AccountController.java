@@ -18,15 +18,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.mavericsystems.account.constants.Constant.*;
+
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
     @Autowired
     AccountService accountService;
 
-    String accNotFound = "Account Not found for : ";
-    String noExistingAccountFound = "No Existing Account found for this customer";
-    String accTypeAlreadyExist = "Account Type Already Exist";
     @PostMapping("/account") //this method is only called from customer application
     public Account addAccount(@Valid @RequestBody AccountDetailsDTO account){
         Account account1 = new Account(account.getCustomerId(),account.getAccountCreationDate(),account.getAccountType(),account.getAccountBalance(),account.getIsActive(), LocalDateTime.now());
@@ -86,7 +85,7 @@ public class AccountController {
         if(Boolean.FALSE.equals(accountService.isActiveAccount(id)))
             throw new AccountNotFoundException(accNotFound + id);
         if(Boolean.TRUE.equals(accountService.isCustomerSingleAccountHolder(id)))
-            throw new AccountCannotBeDeletedException("Single Account Holder. Account cannot be directly deleted");
+            throw new AccountCannotBeDeletedException(accCannotBeDeleted);
         return new ResponseEntity<>(accountService.deleteAccount(id),HttpStatus.OK);
 
     }
