@@ -91,3 +91,60 @@
 2022-02-28 07:48:26.305  INFO [account,,] 22396 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
 2022-02-28 07:48:26.326  INFO [account,,] 22396 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ACCOUNT/MDB22LT465.mavericsystems.lan:account:8071 - deregister  status: 200
 2022-02-28 07:48:26.353  INFO [account,,] 22396 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2022-02-28 07:48:34.267  INFO [account,,] 20284 --- [restartedMain] c.m.account.AccountApplication           : Starting AccountApplication using Java 17.0.2 on MDB22LT465 with PID 20284 (D:\Spring\MicroService Demo1\account\target\classes started by vishnup in D:\Spring\MicroService Demo1)
+2022-02-28 07:48:34.269  INFO [account,,] 20284 --- [restartedMain] c.m.account.AccountApplication           : No active profile set, falling back to default profiles: default
+2022-02-28 07:48:34.375  INFO [account,,] 20284 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-28 07:48:34.375  INFO [account,,] 20284 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-28 07:48:36.428  INFO [account,,] 20284 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-28 07:48:36.661  INFO [account,,] 20284 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 214 ms. Found 1 JPA repository interfaces.
+2022-02-28 07:48:37.435  INFO [account,,] 20284 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=d5a71277-62ec-38db-918d-d939d45a7ff9
+2022-02-28 07:48:44.157  INFO [account,,] 20284 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8071 (http)
+2022-02-28 07:48:44.181  INFO [account,,] 20284 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-28 07:48:44.182  INFO [account,,] 20284 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-28 07:48:44.495  INFO [account,,] 20284 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-28 07:48:44.496  INFO [account,,] 20284 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10120 ms
+2022-02-28 07:48:44.985  INFO [account,,] 20284 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-28 07:48:45.149  INFO [account,,] 20284 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-28 07:48:45.635  INFO [account,,] 20284 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-28 07:48:45.920  INFO [account,,] 20284 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-28 07:48:46.775  INFO [account,,] 20284 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-28 07:48:46.804  INFO [account,,] 20284 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2022-02-28 07:48:48.248  INFO [account,,] 20284 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-28 07:48:48.265  INFO [account,,] 20284 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-28 07:48:49.450  WARN [account,,] 20284 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-28 07:48:51.052  INFO [account,,] 20284 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-28 07:48:51.640  INFO [account,,] 20284 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2022-02-28 07:48:52.585  WARN [account,,] 20284 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2022-02-28 07:48:52.767  INFO [account,,] 20284 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2022-02-28 07:48:52.860  INFO [account,,] 20284 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2022-02-28 07:48:53.071  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2022-02-28 07:48:53.080  INFO [account,,] 20284 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-02-28 07:48:53.139  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2022-02-28 07:48:53.139  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2022-02-28 07:48:53.140  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2022-02-28 07:48:53.140  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2022-02-28 07:48:53.140  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2022-02-28 07:48:53.140  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2022-02-28 07:48:53.141  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2022-02-28 07:48:53.563  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2022-02-28 07:48:53.576  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2022-02-28 07:48:53.584  INFO [account,,] 20284 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-02-28 07:48:53.594  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1646014733592 with initial instances count: 2
+2022-02-28 07:48:53.629  INFO [account,,] 20284 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application ACCOUNT with eureka with status UP
+2022-02-28 07:48:53.630  INFO [account,,] 20284 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1646014733630, current=UP, previous=STARTING]
+2022-02-28 07:48:53.633  INFO [account,,] 20284 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ACCOUNT/MDB22LT465.mavericsystems.lan:account:8071: registering service...
+2022-02-28 07:48:53.686  INFO [account,,] 20284 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8071 (http) with context path ''
+2022-02-28 07:48:53.688  INFO [account,,] 20284 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8071
+2022-02-28 07:48:53.712  INFO [account,,] 20284 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ACCOUNT/MDB22LT465.mavericsystems.lan:account:8071 - registration status: 204
+2022-02-28 07:48:54.381  INFO [account,,] 20284 --- [restartedMain] c.m.account.AccountApplication           : Started AccountApplication in 21.857 seconds (JVM running for 22.856)
+2022-02-28 07:49:53.172  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-28 07:49:53.172  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-28 07:49:53.174  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-02-28 07:49:53.224  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : Executing controller execution(List com.mavericsystems.account.controller.AccountController.getAccountDetailsByCustomerId(Integer))
+2022-02-28 07:49:53.240  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : Executing service execution(Boolean com.mavericsystems.account.service.AccountServiceImpl.isActive(Integer))
+2022-02-28 07:49:53.507  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : Executing service execution(List com.mavericsystems.account.service.AccountServiceImpl.getAccountDetailsByCustomerId(Integer))
+2022-02-28 07:49:53.510  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : execution(List com.mavericsystems.account.controller.AccountController.getAccountDetailsByCustomerId(Integer)) returned with value [Account(accountId=13, customerId=51, accountCreationDate=2022-02-28, accountType=CURRENT, accountBalance=100, isActive=true, lastAmountReceivedDate=2022-02-28T07:27:25)]
+2022-02-28 07:49:53.522  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : Complete exceution of controller execution(List com.mavericsystems.account.controller.AccountController.getAccountDetailsByCustomerId(Integer))
+2022-02-28 07:49:53.522  INFO [account,a130d99d5949679d,145acda49c146fc7] 20284 --- [http-nio-8071-exec-1] c.m.account.aop.AccountAspect            : Time taken by execution(List com.mavericsystems.account.controller.AccountController.getAccountDetailsByCustomerId(Integer)) is 298 ms
+2022-02-28 07:53:53.156  INFO [account,,] 20284 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-02-28 07:58:53.171  INFO [account,,] 20284 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
