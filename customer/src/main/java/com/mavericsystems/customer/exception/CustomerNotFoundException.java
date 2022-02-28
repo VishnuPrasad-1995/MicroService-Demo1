@@ -1,5 +1,6 @@
 package com.mavericsystems.customer.exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -8,4 +9,5 @@ public class CustomerNotFoundException extends RuntimeException{
     public CustomerNotFoundException(String s) {
        super(s);
     }
+
 }

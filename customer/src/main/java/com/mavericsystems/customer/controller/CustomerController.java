@@ -7,6 +7,9 @@ import com.mavericsystems.customer.model.RequiredResponse;
 import com.mavericsystems.customer.dto.UpdateCustomerDTO;
 import com.mavericsystems.customer.model.CustomerAllData;
 import com.mavericsystems.customer.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +23,13 @@ import java.util.List;
 import static com.mavericsystems.customer.constants.Constant.custAlreadyExist;
 import static com.mavericsystems.customer.constants.Constant.custNotFound;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-
+    private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
 
     @PostMapping("/customer")
@@ -35,6 +38,7 @@ public class CustomerController {
             if(customerService.customerPresent(customerId)!=null){
                 throw new CustomerAlreadyExistException(custAlreadyExist + customerId);//Checks for customer with ID passed in request body. If Already exist with this Id throws exception
             }
+            logger.info("Controller class");
             return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED);//Customer and Account value are send to the addCustomer method
     }
 
@@ -60,7 +64,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getAllCustomer(),HttpStatus.OK);
     }
 
-    @PutMapping("/customer/customerId/{id}")
+    @PutMapping("/customer/{id}")
     public ResponseEntity<Customer> updateCustomerDetails(@PathVariable("id") Integer id,@Valid @RequestBody UpdateCustomerDTO customer){//only specific objects in the DTO object can be updated for a customer
         if(Boolean.FALSE.equals(customerService.customerIsActive(id)))
         {

@@ -8,21 +8,18 @@ import com.mavericsystems.customer.model.*;
 import com.mavericsystems.customer.repo.CustomerRepo;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.mavericsystems.customer.constants.Constant.serverDown;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    @Autowired
-    RestTemplate restTemplate;
+
     @Autowired
     CustomerRepo customerRepo;
     @Autowired
@@ -44,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer.setCustomer(customerRepo.save(new Customer(LocalDate.now(),customer.getCustomer().getCustomerFirstName(),customer.getCustomer().getCustomerLastName(),customer.getCustomer().getCustomerId(),customer.getCustomer().getPhoneNumber(),customer.getAccount().getIsActive(),customer.getCustomer().getAddress(),customer.getCustomer().getCustomerType(), LocalDateTime.now())));
         return customer;
     }
-         catch(HystrixRuntimeException e) {
+         catch(Exception e) {
             throw new CustomFeignException(serverDown);
         }
     }
